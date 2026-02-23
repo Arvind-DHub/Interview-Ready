@@ -1,7 +1,12 @@
+import dns from 'dns';
+// Set DNS servers before any network code 
+dns.setServers(['8.8.8.8', '1.1.1.1']);
+//solves ECONNREFUSED error due to change in the c-ares library the DNS fallback detection bug in Node
 //const express = require('express') usig module type 
 import express from "express"
 import {ENV} from "./lib/env.js"
 import path from "path"
+import { connectDB } from "./lib/db.js";
 
 const app = express();
 
@@ -26,6 +31,14 @@ if(ENV.NODE_ENV == "production"){
 }
 
 
-app.listen(ENV.PORT, ()=> {
-    console.log("Server is running from port:", ENV.PORT)
-})
+const startServer = async() => {
+    try{
+        await connectDB();
+        app.listen(ENV.PORT, ()=> {
+        console.log("👌 Server is running from port:", ENV.PORT); })
+    }catch(error){
+        console.error("💥 Error Starting the server ",error);
+    }
+}
+
+startServer();
