@@ -1,0 +1,32 @@
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignOutButton,
+  UserButton,
+} from "@clerk/clerk-react";
+import toast from "react-hot-toast";
+
+function HomePage() {
+  return (
+    <div>
+      <button
+        className="btn btn-secondary"
+        onClick={() => toast.success("This is a success Toast")}
+      >
+        Click Me
+      </button>
+      <SignedOut>
+        <SignInButton mode="modal" />
+      </SignedOut>
+
+      <SignedIn>
+        <SignOutButton />
+      </SignedIn>
+
+      <UserButton />
+    </div>
+  );
+}
+
+export default HomePage;
