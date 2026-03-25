@@ -1,7 +1,7 @@
 import React from "react";
 
 function ProblemsPage() {
-  return <div>ProblemsPage</div>;
+  return <div>ProblemsPag</div>;
 }
 
 export default ProblemsPage;
